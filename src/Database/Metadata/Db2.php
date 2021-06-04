@@ -60,7 +60,7 @@ class Db2 extends AbstractMetadata
             $tableNames[] = $tableName;
         }
 
-        return $tableNames;
+        return $this->schema.".".$tableNames;
     }
 
     /**
