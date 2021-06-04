@@ -1,24 +1,20 @@
 {
-    "name": "phpunit/dbunit",
-    "description": "PHPUnit extension for database interaction testing",
+    "name": "phpunit/db2unit",
+    "description": "PHPUnit extension for Db2 database interaction testing",
     "type": "library",
     "keywords": [
         "database",
         "testing",
-        "xunit"
+        "xunit",
+        "db2"
     ],
-    "homepage": "https://github.com/sebastianbergmann/dbunit/",
-    "license": "BSD-3-Clause",
+    "homepage": "https://github.com/diggex/db2unit",
     "authors": [
         {
-            "name": "Sebastian Bergmann",
-            "email": "sebastian@phpunit.de",
-            "role": "lead"
+            "name": "Wang Zhong Hao",
+            "email": "wzhhao@cn.ibm.com"
         }
     ],
-    "support": {
-        "issues": "https://github.com/sebastianbergmann/dbunit/issues"
-    },
     "require": {
         "php": "^7.1",
         "phpunit/phpunit": "^7.0",
@@ -33,7 +29,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "4.0-dev"
+            "dev-master": "4.1-dev"
         }
     }
 }
