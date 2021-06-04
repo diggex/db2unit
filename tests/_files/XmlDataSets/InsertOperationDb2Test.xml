@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <phpunit.table1 table1_id="1" column1="ggfdsa" column2="4654" column3="45.65" column4="41gkjfdhyglj54dsfaf" />
+    <phpunit.table2 table2_id="2" table1_id="1" column5="gfdsagfpwah" column6="464" column7="462.45" column8="hsafd;jhsadfyh;wafsfg gfv s,da b" />
+</dataset>

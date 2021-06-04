@@ -104,7 +104,7 @@ class Extensions_Database_Operation_RowBasedTest extends TestCase
 
         $mockOperation = $this->createPartialMock(
             RowBased::class,
-                ['buildOperationQuery', 'buildOperationArguments']
+            ['buildOperationQuery', 'buildOperationArguments']
         );
 
         /* @var $mockOperation PHPUnit_Framework_MockObject_MockObject */
