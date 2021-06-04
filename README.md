@@ -1,4 +1,3 @@
-[This extension is no longer maintained](https://github.com/sebastianbergmann/dbunit/issues/217)
 
 # DbUnit
 
