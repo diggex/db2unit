@@ -8,27 +8,34 @@
  * file that was distributed with this source code.
  */
 
-use PHPUnit\DbUnit\Database\DefaultConnection;
+
 use PHPUnit\DbUnit\DataSet\CompositeDataSet;
 use PHPUnit\DbUnit\DataSet\DefaultDataSet;
 use PHPUnit\DbUnit\DataSet\DefaultTable;
 use PHPUnit\DbUnit\DataSet\DefaultTableMetadata;
 use PHPUnit\DbUnit\DataSet\FlatXmlDataSet;
+use PHPUnit\DbUnit\Database\DefaultConnection;
+use PHPUnit\DbUnit\Operation\Delete;
+use PHPUnit\DbUnit\Operation\DeleteAll;
+use PHPUnit\DbUnit\Operation\Insert;
+use PHPUnit\DbUnit\Operation\Replace;
 use PHPUnit\DbUnit\Operation\Truncate;
+use PHPUnit\DbUnit\Operation\Update;
+
 use PHPUnit\DbUnit\TestCase;
 
 require_once \dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'DatabaseTestUtility.php';
 
-class Extensions_Database_Operation_OperationsMySQLTest extends TestCase
+class Extensions_Database_Operation_OperationsDb2Test extends TestCase
 {
     protected function setUp(): void
     {
-        if (!\extension_loaded('pdo_mysql')) {
-            $this->markTestSkipped('pdo_mysql is required to run this test.');
+        if (!\extension_loaded('pdo_ibm')) {
+            $this->markTestSkipped('pdo_ibm is required to run this test.');
         }
 
-        if (!\defined('PHPUNIT_TESTSUITE_EXTENSION_DATABASE_MYSQL_DSN')) {
-            $this->markTestSkipped('No MySQL server configured for this test.');
+        if (!\defined('PHPUNIT_TESTSUITE_EXTENSION_DATABASE_DB2_DSN')) {
+            $this->markTestSkipped('No DB2 server configured for this test.');
         }
 
         parent::setUp();
@@ -36,12 +43,14 @@ class Extensions_Database_Operation_OperationsMySQLTest extends TestCase
 
     public function getConnection()
     {
-        return new DefaultConnection(DBUnitTestUtility::getMySQLDB(), 'mysql');
+        $conn =  new DefaultConnection(DBUnitTestUtility::getDb2DB(), PHPUNIT_TESTSUITE_EXTENSION_DATABASE_DB2_SCHEMA);
+        return $conn;
     }
 
     public function getDataSet()
     {
-        return new FlatXmlDataSet(__DIR__ . '/../_files/XmlDataSets/OperationsMySQLTestFixture.xml');
+        $xml = new FlatXmlDataSet(__DIR__ . '/../_files/XmlDataSets/OperationsDb2TestFixture.xml');
+        return $xml;
     }
 
     /**
@@ -55,32 +64,26 @@ class Extensions_Database_Operation_OperationsMySQLTest extends TestCase
         $expectedDataSet = new DefaultDataSet([
             new DefaultTable(
                 new DefaultTableMetadata(
-                    'table1',
+                    'phpunit.table1',
                     ['table1_id', 'column1', 'column2', 'column3', 'column4']
                 )
             ),
             new DefaultTable(
                 new DefaultTableMetadata(
-                    'table2',
+                    'phpunit.table2',
                     ['table2_id', 'table1_id', 'column5', 'column6', 'column7', 'column8']
-                )
-            ),
-            new DefaultTable(
-                new DefaultTableMetadata(
-                    'table3',
-                    ['table3_id', 'table2_id', 'column9', 'column10', 'column11', 'column12']
                 )
             ),
         ]);
 
-        $this->assertDataSetsEqual($expectedDataSet, $this->getConnection()->createDataSet());
+        $this->assertDataSetsEqual($expectedDataSet, $this->getConnection()->createDataSet(['phpunit.table1','phpunit.table2']));
     }
 
     public function getCompositeDataSet()
     {
         $compositeDataset = new CompositeDataSet();
 
-        $dataset = $this->createXMLDataSet(__DIR__ . '/../_files/XmlDataSets/TruncateCompositeTest.xml');
+        $dataset = $this->createXMLDataSet(__DIR__ . '/../_files/XmlDataSets/TruncateCompositeDb2Test.xml');
         $compositeDataset->addDataSet($dataset);
 
         return $compositeDataset;
@@ -94,24 +97,19 @@ class Extensions_Database_Operation_OperationsMySQLTest extends TestCase
         $expectedDataSet = new DefaultDataSet([
             new DefaultTable(
                 new DefaultTableMetadata(
-                    'table1',
+                    'phpunit.table1',
                     ['table1_id', 'column1', 'column2', 'column3', 'column4']
                 )
             ),
             new DefaultTable(
                 new DefaultTableMetadata(
-                    'table2',
+                    'phpunit.table2',
                     ['table2_id', 'table1_id', 'column5', 'column6', 'column7', 'column8']
                 )
-            ),
-            new DefaultTable(
-                new DefaultTableMetadata(
-                    'table3',
-                    ['table3_id', 'table2_id', 'column9', 'column10', 'column11', 'column12']
-                )
-            ),
+            )
         ]);
 
-        $this->assertDataSetsEqual($expectedDataSet, $this->getConnection()->createDataSet());
+        $this->assertDataSetsEqual($expectedDataSet, $this->getConnection()->createDataSet(['phpunit.table1','phpunit.table2']));
     }
+
 }

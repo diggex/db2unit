@@ -28,7 +28,8 @@ abstract class AbstractMetadata implements Metadata
         'sqlite2'  => Sqlite::class,
         'sqlsrv'   => SqlSrv::class,
         'firebird' => Firebird::class,
-        'dblib'    => Dblib::class
+        'dblib'    => Dblib::class,
+        'ibm'      => Db2::class
     ];
 
     /**

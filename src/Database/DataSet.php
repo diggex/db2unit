@@ -76,7 +76,8 @@ class DataSet extends AbstractDataSet
             $orderBy = '';
         }
 
-        return "SELECT {$columnList} FROM {$tableName} {$orderBy}";
+        $query = "SELECT {$columnList} FROM {$tableName} {$orderBy}";
+        return $query;
     }
 
     /**

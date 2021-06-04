@@ -6,7 +6,7 @@
          beStrictAboutOutputDuringTests="true"
          beStrictAboutTodoAnnotatedTests="true"
          verbose="true">
-    <testsuite>
+    <testsuite name="phpunit-dbunit">
         <directory suffix="Test.php">tests/Constraint</directory>
         <directory suffix="Test.php">tests/DataSet</directory>
         <directory suffix="Test.php">tests/Operation</directory>
@@ -15,9 +15,10 @@
 
     <php>
         <const name="PHPUNIT_TESTSUITE" value="true"/>
-        <!--<const name="PHPUNIT_TESTSUITE_EXTENSION_DATABASE_MYSQL_DSN" value="mysql:host=127.0.0.1;dbname=phpunit_tests;port=3306"/>-->
-        <!--<const name="PHPUNIT_TESTSUITE_EXTENSION_DATABASE_MYSQL_USERNAME" value="root"/>-->
-        <!--<const name="PHPUNIT_TESTSUITE_EXTENSION_DATABASE_MYSQL_PASSWORD" value=""/>-->
+        <const name="PHPUNIT_TESTSUITE_EXTENSION_DATABASE_DB2_DSN" value="ibm:DRIVER={IBM DB2 ODBC DRIVER};DATABASE=TEST;HOSTNAME=db2;PORT=50000;PROTOCOL=TCPIP;"/>
+        <const name="PHPUNIT_TESTSUITE_EXTENSION_DATABASE_DB2_USERNAME" value="db2inst1"/>
+        <const name="PHPUNIT_TESTSUITE_EXTENSION_DATABASE_DB2_PASSWORD" value="db2inst1-pwd"/>
+        <const name="PHPUNIT_TESTSUITE_EXTENSION_DATABASE_DB2_SCHEMA" value="phpunit"/>
     </php>
 
     <filter>
