@@ -1,5 +1,5 @@
 {
-    "name": "phpunit/db2unit",
+    "name": "phpdb2unit/db2unit",
     "description": "PHPUnit extension for Db2 database interaction testing",
     "type": "library",
     "keywords": [
