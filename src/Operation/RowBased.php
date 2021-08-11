@@ -70,9 +70,20 @@ abstract class RowBased implements Operation
 
             for ($i = 0; $i < $rowCount; $i++) {
                 $args = $this->buildOperationArguments($databaseTableMetaData, $table, $i);
-
                 try {
-                    $statement->execute($args);
+                    $status = $statement->execute($args);
+
+                    if ($status === false) {
+                        throw new Exception(
+                        $this->operationName,
+                        $query,
+                        $args,
+                        $table,
+                        $statement->errorInfo()[2]
+                    );
+
+                    }
+
                 } catch (\Exception $e) {
                     throw new Exception(
                         $this->operationName,

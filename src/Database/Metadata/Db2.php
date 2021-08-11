@@ -27,7 +27,7 @@ class Db2 extends AbstractMetadata
      *
      * @var string
      */
-    protected $truncateCommand = 'TRUNCATE TABLE';
+    protected $truncateCommand = 'DELETE FROM';
 
     /**
      * @var array

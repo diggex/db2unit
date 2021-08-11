@@ -43,7 +43,8 @@ class DefaultConnection implements Connection
     {
         $this->connection = $connection;
         $this->metaData   = AbstractMetadata::createMetaData($connection, $schema);
-        $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION, PDO::CASE_LOWER);
+        $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $connection->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
     }
 
     /**
